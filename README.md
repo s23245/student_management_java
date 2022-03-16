@@ -1,1 +1,2 @@
-# student_management_java
+# student management java
+Bohdan Bondarenko 
