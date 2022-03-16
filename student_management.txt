@@ -1,0 +1,11 @@
+STUDENT MANAGEMENT PROJECT
+General idea:
+Creating simple student management project
+using SQL databases and GUI as the main source
+of communication with users.
+
+Implemented features:
+1)Login for students/teachers +
+2)Registration for students/teachers +
+3)Teachers can create new course or add new information for given one. -
+4)Show database of students and teachers +/-
