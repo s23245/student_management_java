@@ -198,4 +198,8 @@ public class Login_Frame implements ActionListener {
 
 
     }
+    public void setVisible()
+    {
+        frame.setVisible(true);
+    }
 }

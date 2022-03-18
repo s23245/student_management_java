@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Main_Frame implements ActionListener
 {
@@ -48,13 +50,15 @@ public class Main_Frame implements ActionListener
 
 
         //ADDING BUTTONS TO LEFT CONSTANT PANEL
-        left_column_main_frame.add(Box.createRigidArea(new Dimension(20,20)));
 
         home_left_column_button = new JButton("HOME");
-        home_left_column_button.setBounds(50,50,home_left_column_button.getWidth(),home_left_column_button.getHeight());
+        home_left_column_button.setAlignmentX(Component.LEFT_ALIGNMENT);
         home_left_column_button.setHorizontalAlignment(SwingConstants.LEFT);
         home_left_column_button.setMaximumSize(
-                new Dimension(left_column_main_frame.getWidth(), left_column_main_frame.getHeight()/10)
+                new Dimension(frame.getWidth(), left_column_main_frame.getHeight()/10)
+        );
+        home_left_column_button.setMinimumSize(
+                new Dimension(frame.getWidth(), left_column_main_frame.getHeight()/10)
         );
         home_left_column_button.setFont(new Font("Verdana", Font.BOLD, 18));
         home_left_column_button.setForeground(Color.white);
@@ -63,8 +67,21 @@ public class Main_Frame implements ActionListener
         home_left_column_button.setContentAreaFilled(false);
         left_column_main_frame.add(home_left_column_button);
         home_left_column_button.addActionListener(this);
+        home_left_column_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                home_left_column_button.setBackground(new Color(2, 28, 51));
+                home_left_column_button.setOpaque(true);
 
-        left_column_main_frame.add(Box.createRigidArea(new Dimension(20,20)));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                home_left_column_button.setOpaque(false);
+            }
+        });
+
+
 
         course_left_column_button = new JButton("COURSE");
         course_left_column_button.setHorizontalAlignment(SwingConstants.LEFT);
@@ -78,8 +95,20 @@ public class Main_Frame implements ActionListener
         course_left_column_button.setContentAreaFilled(false);
         left_column_main_frame.add(course_left_column_button);
         course_left_column_button.addActionListener(this);
+        course_left_column_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                course_left_column_button.setBackground(new Color(2, 28, 51));
+                course_left_column_button.setOpaque(true);
 
-        left_column_main_frame.add(Box.createRigidArea(new Dimension(20,20)));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                course_left_column_button.setOpaque(false);
+            }
+        });
+
 
         dashboard_left_column_button = new JButton("DASHBOARD");
         dashboard_left_column_button.setHorizontalAlignment(SwingConstants.LEFT);
@@ -93,7 +122,19 @@ public class Main_Frame implements ActionListener
         dashboard_left_column_button.setContentAreaFilled(false);
         left_column_main_frame.add(dashboard_left_column_button);
         dashboard_left_column_button.addActionListener(this);
-        left_column_main_frame.add(Box.createRigidArea(new Dimension(20,20)));
+        dashboard_left_column_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                dashboard_left_column_button.setBackground(new Color(2, 28, 51));
+                dashboard_left_column_button.setOpaque(true);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                dashboard_left_column_button.setOpaque(false);
+            }
+        });
 
         exit_left_column_button = new JButton("EXIT");
         exit_left_column_button.setHorizontalAlignment(SwingConstants.LEFT);
@@ -107,7 +148,21 @@ public class Main_Frame implements ActionListener
         exit_left_column_button.setContentAreaFilled(false);
         left_column_main_frame.add(exit_left_column_button);
         exit_left_column_button.addActionListener(this);
-        left_column_main_frame.add(Box.createRigidArea(new Dimension(20,20)));
+        exit_left_column_button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                exit_left_column_button.setBackground(new Color(2, 28, 51));
+                exit_left_column_button.setOpaque(true);
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                exit_left_column_button.setOpaque(false);
+            }
+        });
+
+
 
 
 
@@ -136,6 +191,12 @@ public class Main_Frame implements ActionListener
         if(e.getSource() == home_left_column_button)
         {
             left_column_main_frame.setVisible(true);
+        }
+        if(e.getSource() == exit_left_column_button)
+        {
+            frame.setVisible(false);
+            Login_Frame login_frame = new Login_Frame();
+            login_frame.setVisible();
         }
     }
 }
