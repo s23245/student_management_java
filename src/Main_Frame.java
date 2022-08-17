@@ -18,10 +18,20 @@ public class Main_Frame implements ActionListener
     JButton dashboard_left_column_button;
     JButton exit_left_column_button;
 
+    JPanel home_right_panel;
+    JPanel course_right_panel;
+    JPanel dashboard_right_panel;
+
+
+    //Home_right_panel elements
+    JLabel headline;
+    JLabel developer_info;
 
 
 
-    public Main_Frame()
+
+
+    public Main_Frame(User current_user)
     {
         frame = new JFrame("STUDENT APP");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,14 +46,14 @@ public class Main_Frame implements ActionListener
 
         left_column_main_frame = new JPanel();
         left_column_main_frame.setLayout(new BoxLayout(left_column_main_frame,BoxLayout.Y_AXIS));
-        left_column_main_frame.setSize(new Dimension((int)(frame.getWidth()*0.25), frame.getHeight()));
+        left_column_main_frame.setSize(new Dimension((int)(frame.getWidth() * 0.25), frame.getHeight()));
         left_column_main_frame.setBackground(new Color(2, 48, 71));
         left_column_main_frame.setVisible(true);
         main_panel_main_frame.add(left_column_main_frame,BorderLayout.CENTER);
 
 
         right_column_main_frame = new JPanel();
-        right_column_main_frame.setSize(new Dimension((int)(frame.getWidth()*0.75), frame.getHeight()));
+        right_column_main_frame.setSize(new Dimension((int)(frame.getWidth() * 0.75), frame.getHeight()));
         right_column_main_frame.setBackground(new Color(33, 158, 188));
         right_column_main_frame.setVisible(true);
         main_panel_main_frame.add(right_column_main_frame,BorderLayout.CENTER);
@@ -162,9 +172,38 @@ public class Main_Frame implements ActionListener
             }
         });
 
+        home_right_panel = new JPanel();
+        home_right_panel.setLayout(new BorderLayout());
+        home_right_panel.setSize(new Dimension(right_column_main_frame.getWidth(), right_column_main_frame.getHeight()));
+        home_right_panel.setVisible(true);
+        home_right_panel.setOpaque(false);
+        right_column_main_frame.add(home_right_panel);
+
+        headline = new JLabel("HELLO, " + current_user._name.toUpperCase());
+        headline.setFont(new Font("Verdana", Font.BOLD, 18));
+        headline.setHorizontalAlignment(SwingConstants.CENTER);
+        headline.setForeground(Color.white);
+        home_right_panel.add(headline,BorderLayout.NORTH);
+
+        developer_info = new JLabel("Designed by Bohdan Bondarenko 2022");
+        developer_info.setFont(new Font("Verdana", Font.BOLD, 10));
+        developer_info.setForeground(Color.white);
+        home_right_panel.add(developer_info, BorderLayout.SOUTH);
 
 
+        course_right_panel = new JPanel();
+        course_right_panel.setLayout(new BorderLayout());
+        course_right_panel.setSize(new Dimension(right_column_main_frame.getWidth(), right_column_main_frame.getHeight()));
+        course_right_panel.setVisible(true);
+        course_right_panel.setOpaque(false);
+        right_column_main_frame.add(course_right_panel);
 
+        dashboard_right_panel = new JPanel();
+        dashboard_right_panel.setLayout(new BorderLayout());
+        dashboard_right_panel.setSize(new Dimension(right_column_main_frame.getWidth(), right_column_main_frame.getHeight()));
+        dashboard_right_panel.setVisible(true);
+        dashboard_right_panel.setOpaque(false);
+        right_column_main_frame.add(dashboard_right_panel);
 
 
 
@@ -177,7 +216,8 @@ public class Main_Frame implements ActionListener
         } catch( Exception e ) {
             e.printStackTrace();
         }
-        new Main_Frame();
+        User current_user = new User();
+        new Main_Frame(current_user);
     }
 
     public void setVisible()
@@ -190,7 +230,21 @@ public class Main_Frame implements ActionListener
     {
         if(e.getSource() == home_left_column_button)
         {
-            left_column_main_frame.setVisible(true);
+            course_right_panel.setVisible(false);
+            dashboard_right_panel.setVisible(false);
+            home_right_panel.setVisible(true);
+        }
+        if(e.getSource() == course_left_column_button)
+        {
+            dashboard_right_panel.setVisible(false);
+            home_right_panel.setVisible(false);
+            course_right_panel.setVisible(true);
+        }
+        if(e.getSource() == dashboard_left_column_button)
+        {
+            course_right_panel.setVisible(false);
+            home_right_panel.setVisible(false);
+            dashboard_right_panel.setVisible(true);
         }
         if(e.getSource() == exit_left_column_button)
         {

@@ -20,7 +20,8 @@ public class Login_Frame implements ActionListener {
     JButton main_page_registration_button;
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         try {
             javax.swing.UIManager.setLookAndFeel( "javax.swing.plaf.nimbus.NimbusLookAndFeel" );
         } catch( Exception e ) {
@@ -29,7 +30,8 @@ public class Login_Frame implements ActionListener {
         new Login_Frame();
     }
 
-    public Login_Frame() {
+    public Login_Frame()
+    {
         //Creating JFrame and JPanel (with GridBagLayout)
         frame = new JFrame("STUDENT APP");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -133,24 +135,47 @@ public class Login_Frame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        if (e.getSource() == main_page_login_button) {
+        if (e.getSource() == main_page_login_button)
+        {
             String username = main_page_username.getText();
             String surname = String.valueOf(main_page_password.getPassword());
             boolean student_status = main_page_student_checkbox.isSelected();
             boolean teacher_staus = main_page_teacher_checkbox.isSelected();
             int userIsInDB = 0;
 
-            if (student_status && teacher_staus) {
+            if (student_status && teacher_staus)
+            {
                 JOptionPane.showMessageDialog(main_page_panel, "Choose only one checkbox");
-            } else {
+            }
+            else
+            {
+                User current_user = new User();
+
                 if (student_status)
-                    userIsInDB = User.checkUser(new User(username, surname, "STUDENT"));
+                {
+                    current_user._name = username;
+                    current_user._surname = surname;
+                    current_user._status = "STUDENT";
+                    userIsInDB = User.checkUser(current_user);
+                }
+
+
                 if (teacher_staus)
-                    userIsInDB = User.checkUser(new User(username, surname, "TEACHER"));
-                if (userIsInDB == 0) {
+                {
+                    current_user._name = username;
+                    current_user._surname = surname;
+                    current_user._status = "TEACHER";
+                    userIsInDB = User.checkUser(current_user);
+                }
+
+
+                if (userIsInDB == 0)
+                {
                     JOptionPane.showMessageDialog(main_page_panel, "There are no user with such username and/or password");
-                } else {
-                    Main_Frame main_frame = new Main_Frame();
+                }
+                else
+                {
+                    Main_Frame main_frame = new Main_Frame(current_user);
                     main_frame.setVisible();
                     frame.setVisible(false);
 
@@ -158,7 +183,8 @@ public class Login_Frame implements ActionListener {
             }
         }
 
-        if (e.getSource() == main_page_registration_button) {
+        if (e.getSource() == main_page_registration_button)
+        {
             JPanel registrationPanel = new JPanel(new BorderLayout(5, 5));
 
             JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
@@ -184,9 +210,11 @@ public class Login_Frame implements ActionListener {
             int ok_var = JOptionPane.showConfirmDialog(main_page_panel, registrationPanel, "Registration", JOptionPane.OK_CANCEL_OPTION);
 
             if (ok_var == JOptionPane.OK_OPTION)
-                if (checkBox_student.isSelected() && checkBox_teacher.isSelected()) {
+                if (checkBox_student.isSelected() && checkBox_teacher.isSelected())
+                {
                     JOptionPane.showMessageDialog(main_page_panel, "Choose only one checkbox");
-                } else {
+                } else
+                {
                     if (checkBox_student.isSelected())
                         User.add(new User(username.getText(), String.valueOf(password.getPassword()), "STUDENT"));
                     if (checkBox_teacher.isSelected())

@@ -16,6 +16,10 @@ public class User
     
     private static final int count = 0;
 
+    public User()
+    {
+
+    }
     public User(String name, String surname, String status)
     {
         this._name = name;
@@ -60,7 +64,7 @@ public class User
 
 
         try {
-            PreparedStatement statement = acc._connection.prepareStatement(statementString);
+            PreparedStatement statement = _connection.prepareStatement(statementString);
             statement.setInt(1,acc._id);
             statement.setString(2,acc._name);
             statement.setString(3, acc._surname);
@@ -87,7 +91,7 @@ public class User
 
 
         try {
-            PreparedStatement statement = acc._connection.prepareStatement(statementString);
+            PreparedStatement statement = _connection.prepareStatement(statementString);
             statement.setInt(1,acc._id);
             statement.executeUpdate();
 
